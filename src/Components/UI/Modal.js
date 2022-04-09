@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import style from "./Modal.module.css";
 
 const Backdrop = props => {
-  return <div className={style.backdrop}></div>;
+  return <div className={style.backdrop} onClick={props.onClick}></div>;
 };
 const ModalOverlay = (props) => {
   return (
@@ -13,11 +13,10 @@ const ModalOverlay = (props) => {
   );
 };
 const portalElement = document.getElementById("overlays");
-console.log("portalELement", portalElement);
 const Modal = (props) => {
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop />, portalElement)}
+      {ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, portalElement)}
       {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, portalElement)}
     </Fragment>
   );
